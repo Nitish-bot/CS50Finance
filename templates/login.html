@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block main %}
+    <form action="/{{route}}" method="post">
+        {% if sell %}
+        <div class="mb-3">
+            <select autofocus class="form-select mx-auto w-auto" name="{{params[0]}}">
+                <option selected class="mx-auto w-auto">Symbol</option>
+                {% for stock in sell %}
+                <option value="{{stock}}">{{stock}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% else %}
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="{{params[0]}}" placeholder="{{params[0] | capitalize}}" type="text">
+        </div>
+        {% endif %}
+        {% if params[1] %}
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="{{ params[1] }}" placeholder="{{ params[1] | capitalize }}" type="{{ params[2] }}">
+        </div>
+        {% endif %}
+        {% if reg %}
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm password" type="password">
+        </div>
+        {% endif %}
+        <button class="btn btn-primary" name="confirmation" type="submit">{{ title }}</button>
+    </form>
+{% endblock %}
